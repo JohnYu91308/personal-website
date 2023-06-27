@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YU CHUN-HAN</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/4caf09a569.js" crossorigin="anonymous"></script>
+<body>
+<div id="header">
+    <div class="container-header">
+        <nav>
+            <img src="" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <h1><span>I'm</h1>
+            <br>
+            <ul class="dynamic-texts">
+                <li><span>游峻翰</span></li>
+                <li><span>John</span></li>
+            </ul>
+        </div>
+        <div class="header-text-welcome">
+            <p>Welcome to my site!</p>
+            <button onclick="generate()" class="generate">互動</button>
+        <button onclick="circle()" class="circlebtn">變形</button>
+        </div>
+       
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" 
+        integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
+</script>
+<script>
+    let container = document.querySelector('.container-header');
+    for(var i = 0; i <= 80; i++){
+        let blocks = document.createElement('div');
+        blocks.classList.add('block');
+        container.appendChild(blocks);
+    }
+
+    function circle(){
+        let circlebtn = document.querySelector('.circlebtn');
+        container.classList.toggle('circle');
+    }
+
+    function generate(){
+        anime({
+            targets: '.block',
+            translateX: function(){
+                return anime.random(450,1500);
+            },
+            translateY: function(){
+                return anime.random(-500,500);
+            },
+            scale : function(){
+                return anime.random(1,5);
+            }
+        })
+    }
+    generate();
+    
+</script>
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";   
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";   
+    }
+
+</script>
+<!-- -----------------------about-------------------------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="image/0E1B9CD0-9803-442D-99BC-1EDBB5B335F8.jpg"  >
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">關於我</h1>
+                <p>目前就讀於國立東華大學資訊管理學系，
+                    個性隨和，做事態度盡力盡責，未來想投入資訊產業，
+                    正在自學網頁開發，希望以後的作品能夠幫助到其他人。</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>HTML</span></li>
+                            <li><span>CSS</span></li>
+                            <li><span>JAVASCRIPT</span></li>
+                            <li><span>JAVA</span></li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>大學畢業專題-清冰箱小當家(食譜APP)</span></li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>國立東華大學資訊管理學系學士</span></li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname){
+
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab")
+    }
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby3XzI-_h6eLH1xVCe9pfI2MgsCP8suGH_qt-t7PV8yrceqrZa3tFvniaaIrHxPAOvS/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+<!-- -----------------------portfolio-------------------------- -->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">我的作品</h1>
+        <div class="portfolio-list">
+            <div class="work">
+               <img src="image/code-1839406.jpg" >
+               <div class="layer">
+                    <h3>推屋東華</h3>
+                    <p>東華大學附近租屋評論網</p>
+                    <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+               </div>
+            </div>
+            <div class="work">
+                <img src="image/dual-screen-1745705.png">
+                <div class="layer">
+                    <h3>影像資訊隱藏</h3>
+                    <p>將兩張圖片其一藏在另一張圖片中</p>
+                    <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+               </div>
+            </div>
+            <div class="work">
+                <img src="image/social-media-2786261.jpg">
+                <div class="layer">
+                    <h3>畫圖猜謎</h3>
+                    <p>透過影像肢體辨識畫圖猜謎</p>
+                    <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+               </div>
+            </div>
+        </div>
+        <a href="#" class="btn">更多</a>
+    </div>
+</div>
+<!-- -----------------------contact-------------------------- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">聯絡我</h1>
+                <p><i class="fa-solid fa-envelope"></i>johnyu91308@gmail.com</p>
+                <p><i class="fa-sharp fa-solid fa-phone"></i></i>0917276358</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100003167087648"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/tofu_han/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/%E5%B3%BB%E7%BF%B0-%E6%B8%B8-91393226a/"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="名字" required>
+                    <input type="email" name="Email" placeholder="電子信箱" required>
+                    <textarea name="Message" rows="6" placeholder="訊息"></textarea>
+                    <button type="submit" class="btn-submit">送出</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
